@@ -1,0 +1,10 @@
+---
+instance_type: t2.medium
+sec_group_name: giropops
+image: ami-09e67e426f25ce0d7
+keypair: descomplicando-ansible
+region: us-east-1
+count_master: 1
+count_worker: 2
+profile: giropops
+

@@ -1,0 +1,31 @@
+---
+#- name: Instalando o Docker
+#  shell: curl -fsSL https://get.docker.com | bash
+#  notify: Restart Docker
+
+- name: Alterando cgroups do Docker
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: '0755'
+  notify: Restart Docker
+
+- name: Adicionando as chaves do repo apt do k8s-master
+  apt_key: 
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Adicionando o repo do k8s
+  apt_repository: 
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+
+- name: Instalando os pacotes kubeadm, kubelet e kubectl
+  apt:
+    name: "{{ item }}"
+  with_items: 
+    - kubelet
+    - kubeadm
+    - kubectl
+  notify: Restart Kubelet

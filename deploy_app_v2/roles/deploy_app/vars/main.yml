@@ -1,0 +1,12 @@
+---
+# vars file for deploy_app
+app_path_v1: /opt/giropops/app-v1.yml
+app_path_v2: /opt/giropops/app-v2.yml
+numeros_replicas_old_version: 1
+numeros_replicas_new_version: 10
+version_old: 1.0.0
+version_new: 2.0.0
+prometheus_scrape: "true"
+prometheus_port: 32111
+nginx_port: 80
+environment: production
